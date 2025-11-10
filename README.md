@@ -8,9 +8,7 @@ This project was developed as part of an academic activity. The primary constrai
 
 You can view the live, hosted version of this project here:
 
-[**https://your-username.github.io/your-repo-name/**](https://your-username.github.io/your-repo-name/)
-
-*(Note: Replace the URL above with your actual GitHub Pages link after hosting.)*
+https://shivakantkurmi.github.io/Experiential-learning-webpage/
 
 ## Features
 
@@ -38,11 +36,4 @@ This single file demonstrates a wide range of modern web technologies:
     * Canvas Animation Loop
     * Contact Form "Remember Me" Feature
 
-## How to View Locally
 
-1.  Clone or download this repository.
-2.  Since all content is in one file, simply open the `learning-journey.html` (or `index.html`) file directly in your web browser.
-
----
-
-*This webpage was created by Shivakant Kurmi (23BCG10140), a B.Tech CSE (Gaming Technology) student at VIT Bhopal University.*
