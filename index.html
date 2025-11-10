@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Experiential Learning Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lexend:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Enable dark mode using a class
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Lexend', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Lexend', sans-serif;
+        }
+
+        #animated-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            /* Reduced opacity for a more subtle effect */
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 0.75rem;
+            /* 12px */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+        }
+
+        .dark .content-card {
+            background: rgba(17, 24, 39, 0.7);
+            /* dark:bg-gray-900 with opacity */
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            position: relative;
+            text-decoration: none;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4F46E5;
+            /* Indigo-600 */
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .dark .nav-link::after {
+            background-color: #818CF8;
+            /* Indigo-400 */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-950 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+
+    <header
+        class="bg-white/80 dark:bg-gray-900/80 shadow-md sticky top-0 z-50 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1
+                class="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 dark:from-blue-400 dark:to-purple-500">
+                My Learning Journey
+            </h1>
+            <div class="flex items-center space-x-6">
+                <a href="#pune"
+                    class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium">Pune</a>
+                <a href="#hyderabad"
+                    class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium">Hyderabad</a>
+                <a href="#reflections"
+                    class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium">Reflections</a>
+                <!-- Dark Mode Toggle Button -->
+                <button id="theme-toggle"
+                    class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 focus:outline-none hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                    <!-- Sun Icon -->
+                    <svg id="theme-icon-sun" class="h-5 w-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 12a5 5 0 100-10 5 5 0 000 10z" />
+                    </svg>
+                    <!-- Moon Icon -->
+                    <svg id="theme-icon-moon" class="h-5 w-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section class="mb-12 animate-fade-in-up">
+            <div class="content-card shadow-lg p-6 md:p-8 text-center">
+                <h2 class="text-3xl font-bold mb-4">About Me</h2>
+
+                <img src="https://placehold.co/150x150/3B82F6/FFFFFF?text=SK" alt="Shivakant Kurmi"
+                    class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-transparent bg-clip-border p-1 bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg">
+
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">Shivakant Kurmi</h3>
+                <p class="text-lg text-blue-600 dark:text-blue-400 font-medium">23BCG10140</p>
+                <p class="text-md text-gray-700 dark:text-gray-300 mt-2 max-w-2xl mx-auto">
+                    Student at <strong>VIT Bhopal University</strong> pursuing a B.Tech in CSE
+                    with a specialization in <strong>Gaming Technology</strong>.
+                </p>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section class="text-center mb-16 animate-fade-in-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Experiential Learning 2025</h2>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                A visual journal of my trips to Pune and Hyderabad. This page documents my key takeaways, experiences,
+                and reflections using modern web technologies.
+            </p>
+        </section>
+
+        <!-- Pune Trip Article -->
+        <article id="pune" class="mb-16 scroll-mt-20">
+            <div class="content-card shadow-lg p-6 md:p-8">
+                <h3 class="text-3xl font-bold mb-4 text-blue-600 dark:text-blue-400">Pune: Industry & Culture</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium uppercase mb-6">Oct 27, 2025 - Oct 31,
+                    2025</p>
+
+                <p class="mb-6 text-gray-700 dark:text-gray-300">
+                    My week in Pune from October 27th to 31st was an incredible dive into the city's dynamic blend of
+                    industrial innovation and rich cultural heritage. This journey provided invaluable insights into the
+                    real-world applications of our engineering studies, allowing us to connect classroom theory with the
+                    bustling world of manufacturing and technology.
+                </p>
+
+                <section class="mb-6">
+                    <h4 class="text-2xl font-semibold mb-4">Photo Gallery</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+
+                        <figure
+                            class="overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl">
+                            <div class="group relative">
+                                <img src="images/p2.jpg" alt="Placeholder for Pune visit"
+                                    class="w-full h-auto object-cover transform transition-all duration-500 group-hover:scale-105 group-hover:brightness-105 lightbox-trigger cursor-pointer">
+
+                                <div
+                                    class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100 invisible group-hover:visible pointer-events-none group-hover:pointer-events-auto">
+                                    <p class="text-white font-semibold mb-2">More Images</p>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <img src="images/p3.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                        <img src="images/p21.png" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                    </div>
+                                </div>
+                            </div>
+                            <figcaption class="p-3 bg-gray-100 dark:bg-gray-800 text-sm text-center">
+
+                                <b>Day 1 WorkShop : Cloud and Networking</b><br>
+                                The first day of the Experiential Learning Program began with a hands-on workshop on
+                                Networking & Cloud, organized and conducted by I-Medita Learning Solutions Pvt.
+                                Ltd., Pune.  The workshop aimed to help
+                                students understand how enterprise-level networks are designed, configured, and
+                                maintained, bridging the gap between academic concepts and real-world implementation.
+                                Specific objectives included:
+                                • Understanding the role and architecture of routers, switches, and firewalls in a
+                                network.
+                                • Learning about IP addressing, subnetting, and routing protocols such as RIP and OSPF.
+                                • Performing basic and advanced device configuration on Cisco routers and switches.
+
+                            </figcaption>
+                        </figure>
+
+
+
+                        <figure
+                            class="overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl">
+                            <div class="group relative">
+                                <img src="images/p21.png" alt="Placeholder for Pune visit"
+                                    class="w-full h-auto object-cover transform transition-all duration-500 group-hover:scale-105 group-hover:brightness-105 lightbox-trigger cursor-pointer">
+
+                                <div
+                                    class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100 invisible group-hover:visible pointer-events-none group-hover:pointer-events-auto">
+                                    <p class="text-white font-semibold mb-2">More Images</p>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <img src="images/p2.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                    </div>
+                                </div>
+                            </div>
+                            <figcaption class="p-3 bg-gray-100 dark:bg-gray-800 text-sm text-center">
+                                <b>Day 2 Workshop : Cloud and Networking</b><br>
+                                The second day continued at the same venue with an exclusive focus on Cloud
+                                Computing technologies and virtualized network environments. The objective of this
+                                session was to introduce participants to cloud service models, deployment architectures,
+                                and hands-on usage of AWS CLI (Amazon Web Services Command Line Interface)
+                                for managing cloud infrastructure.
+                                Key objectives included:
+                                • Understanding the core principles of cloud computing and its types (public, private,
+                                hybrid).
+                                • Learning the difference between IaaS, PaaS, and SaaS service models.
+                                • Exploring AWS account setup, instance creation, and storage management.
+                                • Performing basic operations using AWS CLI to automate infrastructure tasks.
+                                • Understanding cloud networking, security groups, and virtual private clouds (VPCs).
+                            </figcaption>
+                        </figure>
+
+
+
+                        <figure
+                            class="overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl">
+                            <div class="group relative">
+                                <img src="images/p31.png"
+                                    alt="Placeholder for Pune visit"
+                                    class="w-full h-auto object-cover transform transition-all duration-500 group-hover:scale-105 group-hover:brightness-105 lightbox-trigger cursor-pointer">
+
+                                <div
+                                    class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100 invisible group-hover:visible pointer-events-none group-hover:pointer-events-auto">
+                                    <p class="text-white font-semibold mb-2">More Images</p>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <img src="images/p31.png" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                        <img src="images/p4.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                    </div>
+                                </div>
+                            </div>
+                            <figcaption class="p-3 bg-gray-100 dark:bg-gray-800 text-sm text-center">
+                                <b>Day 3 : entrepreneurship session </b><br>
+                                The entrepreneurship session was extremely insightful and motivational. The speakers shared real-world 
+experiences and success stories that inspired me to think beyond traditional employment and explore 
+innovation-driven career paths. The discussions on market trends, startup culture, and business 
+strategies broadened my understanding of how ideas evolve into successful ventures. This session 
+effectively complemented the technical sessions of the previous days by adding a managerial and 
+strategic dimension to our overall learning experience.
+                            </figcaption>
+                        </figure>
+
+                        <!-- INSTRUCTION: Slot 5 for Pune -->
+                        <figure
+                            class="overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl">
+                            <div class="group relative">
+                                <!-- INSTRUCTION: This is the MAIN (cover) image for the slot -->
+                                <img src="images/p51.png"
+                                    alt="Placeholder for Pune visit"
+                                    class="w-full h-auto object-cover transform transition-all duration-500 group-hover:scale-105 group-hover:brightness-105 lightbox-trigger cursor-pointer">
+
+                                <!-- INSTRUCTION: This is the hover gallery. Add more images inside the grid-cols-2 div -->
+                                <div
+                                    class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100 invisible group-hover:visible pointer-events-none group-hover:pointer-events-auto">
+                                    <p class="text-white font-semibold mb-2">More Images</p>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <img src="images/p51.png" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                        <img src="images/p5.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                        <!-- You can add more... -->
+                                    </div>
+                                </div>
+                            </div>
+                            <figcaption class="p-3 bg-gray-100 dark:bg-gray-800 text-sm text-center">
+                                <!-- INSTRUCTION: Add a caption for your image -->
+                               <b> Industry Visit: BSNL</b>
+                            </figcaption>
+                        </figure>
+
+
+
+                        <figure
+                            class="overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl">
+                            <div class="group relative">
+                                <img src="images/p11.png" alt="Placeholder for Pune visit"
+                                    class="w-full h-auto object-cover transform transition-all duration-500 group-hover:scale-105 group-hover:brightness-105 lightbox-trigger cursor-pointer">
+
+                                <div
+                                    class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100 invisible group-hover:visible pointer-events-none group-hover:pointer-events-auto">
+                                    <p class="text-white font-semibold mb-2">More Images</p>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <img src="images/p1.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                        <img src="images/p12.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <figcaption class="p-3 bg-gray-100 dark:bg-gray-800 text-sm text-center">
+                                <b>
+                                City Tour : Shaniwar Wada & joshi museum of miniature railways
+                                </b>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </section>
+            </div>
+        </article>
+
+        <!-- Hyderabad Trip Article -->
+        <article id="hyderabad" class="mb-16 scroll-mt-20">
+            <div class="content-card shadow-lg p-6 md:p-8">
+                <h3 class="text-3xl font-bold mb-4 text-purple-600 dark:text-purple-400">Hyderabad: Tech & Heritage</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium uppercase mb-6">Nov 3, 2025 - Nov 7, 2025
+                </p>
+
+                <p class="mb-6 text-gray-700 dark:text-gray-300">
+                    The trip to Hyderabad, from November 3rd to 7th, was a fascinating journey through a city of
+                    contrasts. We delved into the heart of India's tech boom, visiting futuristic IT parks and
+                    innovation hubs. Juxtaposed with this modernity, we also explored the city's deep historical roots
+                    and magnificent heritage, witnessing how technology and tradition coexist and thrive together.
+                </p>
+
+                <section class="mb-6">
+                    <h4 class="text-2xl font-semibold mb-4">Photo Gallery</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+                        <figure
+                            class="overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl">
+                            <div class="group relative">
+                                <img src="images/h1.jpg"
+                                    alt="Placeholder for Hyderabad visit"
+                                    class="w-full h-auto object-cover transform transition-all duration-500 group-hover:scale-105 group-hover:brightness-105 lightbox-trigger cursor-pointer">
+
+                                <div
+                                    class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100 invisible group-hover:visible pointer-events-none group-hover:pointer-events-auto">
+                                    <p class="text-white font-semibold mb-2">More Images</p>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <img src="images/h11.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                        <img src="images/h12.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                        <!-- <img src="images/h13.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer"> -->
+                                        <img src="images/h14.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                        <!-- <img src="images/h15.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer"> -->
+                                        <img src="images/h16.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <figcaption class="p-3 bg-gray-100 dark:bg-gray-800 text-sm text-center">
+                                <b>
+                                    Day 1 : City Tour
+                                </b>
+                            </figcaption>
+                        </figure>
+
+                        <figure
+                            class="overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl">
+                            <div class="group relative">
+                                <img src="images/h2.jpg"
+                                    alt="Placeholder for Hyderabad visit"
+                                    class="w-full h-auto object-cover transform transition-all duration-500 group-hover:scale-105 group-hover:brightness-105 lightbox-trigger cursor-pointer">
+                                <div
+                                    class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100 invisible group-hover:visible pointer-events-none group-hover:pointer-events-auto">
+                                    <p class="text-white font-semibold mb-2">More Images</p>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <img src="images/h21.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                        <img src="images/h22.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                        <img src="images/h23.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                        <img src="images/h24.png" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                    </div>
+                                </div>
+                            </div>
+                            <figcaption class="p-3 bg-gray-100 dark:bg-gray-800 text-sm text-center">
+                                <b>
+                                    Day 2 : T Works Visit
+                                </b>
+                            </figcaption>
+                        </figure>
+
+                        <!-- INSTRUCTION: Slot 3 for Hyderabad -->
+                        <figure
+                            class="overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl">
+                            <div class="group relative">
+                                <img src="images/h3.jpg"
+                                    alt="Placeholder for Hyderabad visit"
+                                    class="w-full h-auto object-cover transform transition-all duration-500 group-hover:scale-105 group-hover:brightness-105 lightbox-trigger cursor-pointer">
+
+                                <!-- INSTRUCTION: This is the hover gallery. Add more images inside the grid-cols-2 div -->
+                                <div
+                                    class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100 invisible group-hover:visible pointer-events-none group-hover:pointer-events-auto">
+                                    <p class="text-white font-semibold mb-2">More Images</p>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <img src="images/h31.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                        <img src="images/h32.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                    
+                                    </div>
+                                </div>
+                            </div>
+                            <figcaption class="p-3 bg-gray-100 dark:bg-gray-800 text-sm text-center">
+                                <b>
+                                    Day 3 : BSNL Center Visit
+                                </b>
+                            </figcaption>
+                        </figure>
+
+                        <!-- INSTRUCTION: Slot 4 for Hyderabad -->
+                        <figure
+                            class="overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl">
+                            <div class="group relative">
+                                <img src="images/h4.png"
+                                    alt="Placeholder for Hyderabad visit"
+                                    class="w-full h-auto object-cover transform transition-all duration-500 group-hover:scale-105 group-hover:brightness-105 lightbox-trigger cursor-pointer">
+
+                                <div
+                                    class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100 invisible group-hover:visible pointer-events-none group-hover:pointer-events-auto">
+                                    <p class="text-white font-semibold mb-2">More Images</p>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <img src="images/h41.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                        <img src="images/h42.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <figcaption class="p-3 bg-gray-100 dark:bg-gray-800 text-sm text-center">
+                                <b>
+                                    Day 4 : L&T Metro Visit
+                                </b>
+                            </figcaption>
+                        </figure>
+
+                        <!-- INSTRUCTION: Slot 5 for Hyderabad -->
+                        <figure
+                            class="overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl">
+                            <div class="group relative">
+                                <img src="images/h5.jpg"
+                                    alt="Placeholder for Hyderabad visit"
+                                    class="w-full h-auto object-cover transform transition-all duration-500 group-hover:scale-105 group-hover:brightness-105 lightbox-trigger cursor-pointer">
+
+                                <div
+                                    class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100 invisible group-hover:visible pointer-events-none group-hover:pointer-events-auto">
+                                    <p class="text-white font-semibold mb-2">More Images</p>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <img src="images/h51.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                        <img src="images/h52.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                        <img src="images/h53.jpg" alt="More"
+                                            class="rounded-md lightbox-trigger cursor-pointer">
+                                    </div>
+                                </div>
+                            </div>
+                            <figcaption class="p-3 bg-gray-100 dark:bg-gray-800 text-sm text-center">
+                                <b>
+                                    Day 5 : T- Hub visit
+                                </b><br>
+                                The visit to T-Hub was highly inspiring and informative. Experiencing India’s leading innovation 
+hub firsthand gave me a clear vision of how startups evolve from an idea to a market-ready 
+product. The discussions with mentors and startup founders helped me understand the mindset, 
+challenges, and determination required in entrepreneurship. It was a motivating experience that 
+emphasized creativity, innovation, and perseverance as key ingredients for success in today’s 
+competitive world. 
+                            </figcaption>
+                        </figure>
+
+                    </div>
+                </section>
+            </div>
+        </article>
+
+        <!-- Reflections and Interactive Section -->
+        <section id="reflections" class="scroll-mt-20">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- Aside with Canvas -->
+                <aside class="lg:col-span-1 content-card shadow-lg p-6 relative overflow-hidden h-96 lg:h-auto">
+                    <h4 class="text-2xl font-semibold mb-4">Reflection Space</h4>
+                    <p class="text-sm mb-4">
+                        A quiet space for reflection. This canvas element uses JavaScript to draw an abstract, animated
+                        background.
+                    </p>
+                    <!-- Canvas Element -->
+                    <canvas id="animated-canvas"></canvas>
+                </aside>
+
+                <!-- Form with HTML5 Input Types -->
+                <div class="lg:col-span-2 content-card shadow-lg p-6">
+                    <h4 class="text-2xl font-semibold mb-4">Share Your Story</h4>
+                    <p class="mb-6">
+                        Did you have a similar learning experience? Share it!
+                    </p>
+                    <form id="contact-form" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium mb-1">Name</label>
+                            <input type="text" id="name" name="name" required
+                                class="w-full p-2.5 border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium mb-1">Email</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full p-2.5 border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
+                        </div>
+                        <div>
+                            <label for="trip-date" class="block text-sm font-medium mb-1">Date of your trip</label>
+                            <input type="date" id="trip-date" name="trip-date"
+                                class="w-full p-2.5 border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium mb-1">Your Story</label>
+                            <textarea id="message" name="message" rows="4"
+                                class="w-full p-2.5 border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none transition-colors"></textarea>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="remember" name="remember"
+                                class="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                            <label for="remember" class="ml-2 block text-sm">Remember my name</label>
+                        </div>
+                        <div>
+                            <button type="submit"
+                                class="w-full md:w-auto px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg shadow-md hover:bg-gradient-to-br hover:scale-[1.03] transform transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-purple-800">
+                                Submit Reflection
+                            </button>
+                        </div>
+                    </form>
+                    <p id="form-success" class="mt-4 text-green-600 dark:text-green-400 hidden">Thanks! Your reflection
+                        has been submitted (demo).</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer
+        class="bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400 mt-16 py-8 border-t border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Shivakant Kurmi. All rights reserved.</p>
+            <p class="text-sm text-gray-500 mt-2">
+                This page was built using HTML5, Tailwind CSS, and JavaScript.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Fullscreen Image Lightbox -->
+    <div id="lightbox-overlay"
+        class="fixed inset-0 z-[999] flex items-center justify-center bg-black/90 p-4 opacity-0 invisible transition-opacity duration-300">
+        <button id="lightbox-close"
+            class="absolute top-6 right-6 text-white text-5xl font-bold cursor-pointer opacity-80 hover:opacity-100 z-[1000]">&times;</button>
+        <img id="lightbox-img" src="" alt="Fullscreen image" class="max-w-[90vw] max-h-[90vh] rounded-lg shadow-2xl">
+    </div>
+
+    <!-- JavaScript Section -->
+    <script>
+        // --- Web Storage: Dark Mode Toggle ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIconSun = document.getElementById('theme-icon-sun');
+        const themeIconMoon = document.getElementById('theme-icon-moon');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme in localStorage
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+            themeIconSun.classList.remove('hidden');
+            themeIconMoon.classList.add('hidden');
+        } else {
+            htmlElement.classList.remove('dark');
+            themeIconSun.classList.add('hidden');
+            themeIconMoon.classList.remove('hidden');
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIconSun.classList.add('hidden');
+                themeIconMoon.classList.remove('hidden');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIconSun.classList.remove('hidden');
+                themeIconMoon.classList.add('hidden');
+            }
+        });
+
+        // --- Canvas Animation ---
+        const canvas = document.getElementById('animated-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 100;
+                this.size = Math.random() * 4 + 1; // Slightly smaller
+                this.speed = Math.random() * 2 + 0.5; // Slightly slower
+                this.color = htmlElement.classList.contains('dark') ? 'rgba(255, 255, 255, 0.2)' : 'rgba(59, 130, 246, 0.2)'; // More transparent
+            }
+            update() {
+                this.y -= this.speed;
+                if (this.y < -this.size) {
+                    this.y = canvas.height + Math.random() * 100;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 50; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        // Initialize and run canvas
+        resizeCanvas();
+        initParticles();
+        animateParticles();
+
+        // Re-initialize canvas on window resize and theme toggle
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+        themeToggle.addEventListener('click', initParticles);
+
+        // --- Web Storage: Form 'Remember Me' ---
+        const contactForm = document.getElementById('contact-form');
+        const nameInput = document.getElementById('name');
+        const rememberCheckbox = document.getElementById('remember');
+        const formSuccessMessage = document.getElementById('form-success');
+
+        // Check for saved name in localStorage
+        if (localStorage.getItem('rememberedName')) {
+            nameInput.value = localStorage.getItem('rememberedName');
+            rememberCheckbox.checked = true;
+        }
+
+        // Handle form submission
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent actual form submission for this demo
+
+            if (rememberCheckbox.checked) {
+                // Save name to localStorage
+                localStorage.setItem('rememberedName', nameInput.value);
+            } else {
+                // Remove saved name
+                localStorage.removeItem('rememberedName');
+            }
+
+            // Show success message (demo)
+            formSuccessMessage.classList.remove('hidden');
+            contactForm.reset();
+            // Restore remembered name if it was saved
+            if (localStorage.getItem('rememberedName')) {
+                nameInput.value = localStorage.getItem('rememberedName');
+                rememberCheckbox.checked = true;
+            }
+
+            setTimeout(() => {
+                formSuccessMessage.classList.add('hidden');
+            }, 3000);
+        });
+
+        // --- Fullscreen Image Lightbox ---
+        const lightboxOverlay = document.getElementById('lightbox-overlay');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('lightbox-trigger')) {
+                const src = e.target.getAttribute('src');
+
+                // For placeholder images, try to get a larger version
+                let fullSrc = src;
+                if (src.includes('placehold.co')) {
+                    fullSrc = src.replace('/600x400/', '/1200x800/').replace('/200x200/', '/800x800/');
+                }
+
+                lightboxImg.setAttribute('src', fullSrc);
+                lightboxOverlay.classList.remove('opacity-0', 'invisible');
+                lightboxOverlay.classList.add('opacity-100', 'visible');
+            }
+        });
+
+        // Close lightbox function
+        function closeLightbox() {
+            lightboxOverlay.classList.add('opacity-0', 'invisible');
+            lightboxOverlay.classList.remove('opacity-100', 'visible');
+            // Clear src after transition (optional, but good practice)
+            setTimeout(() => {
+                lightboxImg.setAttribute('src', '');
+            }, 300); // Match transition duration
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+
+        lightboxOverlay.addEventListener('click', function (e) {
+            // Close if clicked on the background overlay, not the image
+            if (e.target === lightboxOverlay) {
+                closeLightbox();
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
